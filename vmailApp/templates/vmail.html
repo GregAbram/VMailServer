@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block code %}
+
+<script>
+
+var current_vmail = "{{ snapshot.vmail }}";
+var current_snapshot = "{{ snapshot.uuid }}";
+
+function first()
+{
+  var url = "/vmail/vmail/get_first_snapshot_json/" + current_vmail + "/";
+  $.getJSON(url, function( data ){
+    if (data['status'] == 'ok')
+    { 
+      current_snapshot = data['snapshot']['uuid'];
+      var i = $('#snapshot_image')
+      i.attr('src', "/static/" + data['snapshot']['url']);
+      $("#txt").text(data['snapshot']['text']);
+    } 
+    else
+      alert("there are no snapshots");
+    
+  });
+}
+
+function prev()
+{
+  var url = "/vmail/vmail/get_prev_snapshot_json/" + current_vmail + "/" + current_snapshot + "/";
+  $.getJSON(url, function( data ){
+    if (data['status'] == 'ok')
+    {
+      current_snapshot = data['snapshot']['uuid'];
+      var i = $('#snapshot_image')
+      i.attr('src', "/static/" + data['snapshot']['url']);
+      $("#txt").text(data['snapshot']['text']);
+    }
+    else
+      alert("that is the first snapshot");
+      
+  });
+}
+
+function next()
+{
+  var url = "/vmail/vmail/get_next_snapshot_json/" + current_vmail + "/" + current_snapshot + "/";
+  $.getJSON(url, function( data ){
+    if (data['status'] == 'ok')
+    {
+      current_snapshot = data['snapshot']['uuid'];
+      var i = $('#snapshot_image')
+      i.attr('src', "/static/" + data['snapshot']['url']);
+      $("#txt").text(data['snapshot']['text']);
+    } 
+    else
+      alert("that is the last snapshot")
+    
+  });
+}
+
+function last()
+{
+  var url = "/vmail/vmail/get_last_snapshot_json/" + current_vmail + "/";
+  $.getJSON(url, function( data ){
+    if (data['status'] == 'ok')
+    {
+      current_snapshot = data['snapshot']['uuid'];
+      var i = $('#snapshot_image')
+      i.attr('src', "/static/" + data['snapshot']['url']);
+      $("#txt").text(data['snapshot']['text']);
+    }
+    else
+      alert("there are no snapshots")
+  });
+}
+
+
+</script>
+<
+{% endblock code %}
+{% block content %}
+
+<img id=snapshot_image src="/static/{{ snapshot.url }}" style="width:500px;height:auto;" alt="none"></img>
+<br>
+<div id=txt>
+  {{ snapshot.text }}
+</div>
+<br>
+<button type=button onclick="first()">First</button>
+<button type=button onclick="prev()">Prev</button>
+<button type=button onclick="next()">Next</button>
+<button type=button onclick="last()">Last</button>
+<br>
+
+{% endblock content %}
+
