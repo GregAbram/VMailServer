@@ -41,8 +41,9 @@ namespace example
     }
 
     class Program
-    { 
-        static string app_location = "http://192.168.4.106:8080/vmail";
+    {
+        //static string app_location = "http://192.168.4.106:8080/vmail";
+        static string app_location = "http://localhost:8080/vmail";
 
         static readonly HttpClient client = new HttpClient();
         static string current_vmail = "none";
