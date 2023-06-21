@@ -1,6 +1,3 @@
-# DEVELOPMENT
-# docker run -p 8080:8080 -v `pwd`/vmail:/var/www/vmail -v `pwd`/db:/data/db -v `pwd`/django:/var/www/django -it vmail
-# APACHE
-docker run -p 27017:27017 -p 8080:80 -v `pwd`/media:/var/www/media -v `pwd`/db:/data/db -v `pwd`:/var/www/VMailServer -it vmail
+docker run -p 27017:27017 -p 8080:80 -v `pwd`/media:/var/www/media -v `pwd`/db:/data/db -v `pwd`:/var/www/VMailServer -dt vmail
 
 

@@ -33,8 +33,8 @@ RUN echo 'Require all granted' >> /etc/apache2/apache2.conf
 RUN echo '</Directory>' >> /etc/apache2/apache2.conf
 
 # USE THIS FOR APACHE 
-# CMD apache2ctl -D BACKGROUND &  nohup mongod > /data/log 2>&1 &  service ssh restart &  tail -f /var/log/apache2/error.log
-CMD apache2ctl -D BACKGROUND &  nohup mongod > /data/log 2>&1 &  service ssh restart &  /bin/bash
+CMD apache2ctl -D BACKGROUND &  nohup mongod > /data/log 2>&1 &  service ssh restart &  tail -f /var/log/apache2/error.log
+# IF you need a prompt in the container : CMD apache2ctl -D BACKGROUND &  nohup mongod > /data/log 2>&1 &  service ssh restart &  /bin/bash
 
 # USE THIS FOR TESTING USING DJANGO DEVELOPMENT SERVER
 # CMD nohup mongod > /data/log 2>&1 &  service ssh restart &  /bin/bash
